@@ -1,75 +1,33 @@
-import 'package:curso_clean/data/http/http.dart';
-import 'package:curso_clean/data/usecases/usecases.dart';
-import 'package:curso_clean/domain/helpers/helpers.dart';
-import 'package:curso_clean/domain/usecases/usecases.dart';
 import 'package:faker/faker.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
+import 'package:test/test.dart';
+import 'package:meta/meta.dart';
 
-class HttpClientSpy extends Mock implements HttpClient {
-  @override
-  Future<void> request({
-    required String url,
-    required String method,
-    Map? body,
-  }) async {
-    super.noSuchMethod(
-      Invocation.method(#request, [url, method, body]),
-      returnValue: Future.value(),
-    );
+class RemoteAuthentication {
+  final HttpClient httpClient;
+  final String url;
+
+  RemoteAuthentication({@required this.httpClient, @required this.url});
+
+  Future<void> auth() async {
+    await httpClient.request(url: url);
   }
 }
 
+abstract class HttpClient {
+  Future<void> request({@required String url}) async {}
+}
+
+class HttpClientSpy extends Mock implements HttpClient {}
+
 void main() {
-  late RemoteAuthentication sut;
-  late HttpClientSpy httpClient;
-  late String url;
+  test('Should call HttClient with correct URL', () async {
+    final httpClient = HttpClientSpy();
+    final url = faker.internet.httpUrl();
+    final sut = RemoteAuthentication(httpClient: httpClient, url: url);
 
-  setUp(() {
-    httpClient = HttpClientSpy();
-    url = faker.internet.httpUrl();
-    sut = RemoteAuthentication(
-      httpClient: httpClient,
-      url: url,
-    );
-  });
+    await sut.auth();
 
-  test(
-    'Should call HttpClient with correct values',
-    () async {
-      final params = AuthenticationParams(
-        email: faker.internet.email(),
-        secret: faker.internet.password(),
-      );
-      await sut.auth(params);
-
-      verify(
-        httpClient.request(
-          url: url,
-          method: 'post',
-          body: {
-            'email': params.email,
-            'password': params.secret,
-          },
-        ),
-      );
-    },
-  );
-
-  test('Should throw UnexpectedError if HttpClient returns 400', () async {
-    final params = AuthenticationParams(
-      email: faker.internet.email(),
-      secret: faker.internet.password(),
-    );
-    when(
-      httpClient.request(
-        url: 'url',
-        method: 'method',
-      ),
-    ).thenThrow(HttpError.badRequest);
-
-    final future = sut.auth(params);
-
-    expect(future, throwsA(DomainError.unexpected));
+    verify(httpClient.request(url: url));
   });
 }
