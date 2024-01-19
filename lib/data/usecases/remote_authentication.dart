@@ -1,5 +1,5 @@
 import 'package:curso_clean/data/http/http.dart';
-import 'package:curso_clean/domain/helpers/domain_error.dart';
+import 'package:curso_clean/domain/helpers/helpers.dart';
 import 'package:curso_clean/domain/usecases/usecases.dart';
 import 'package:meta/meta.dart';
 
