@@ -5,7 +5,7 @@ import 'package:curso_clean/domain/helpers/helpers.dart';
 import 'package:curso_clean/domain/usecases/usecases.dart';
 import 'package:meta/meta.dart';
 
-class RemoteAuthentication {
+class RemoteAuthentication implements Authentication {
   final HttpClient httpClient;
   final String url;
 
