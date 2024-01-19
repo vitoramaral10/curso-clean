@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:curso_clean/data/http/http.dart';
 import 'package:curso_clean/infra/http/http.dart';
 import 'package:faker/faker.dart';
@@ -25,7 +23,6 @@ void main() {
       final future = sut.request(url: url, method: 'invalid_method');
 
       expect(future, throwsA(HttpError.serverError));
-
     });
   });
 
