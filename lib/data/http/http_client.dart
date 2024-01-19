@@ -1,9 +1,9 @@
-import 'package:curso_clean/data/http/http.dart';
+import 'package:meta/meta.dart';
 
 abstract class HttpClient {
   Future<void> request({
-    required String url,
-    required String method,
-    Map? body,
+    @required String url,
+    @required String method,
+    Map body,
   }) async {}
 }
