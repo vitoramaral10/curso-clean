@@ -1,3 +1,4 @@
+import 'package:curso_clean/data/http/http.dart';
 import 'package:curso_clean/domain/entities/entities.dart';
 
 class RemoteAccountModel {
@@ -7,8 +8,9 @@ class RemoteAccountModel {
 
   factory RemoteAccountModel.fromJson(Map json) {
     if (!json.containsKey('accessToken')) {
-      throw Exception();
+      throw HttpError.invalidData;
     }
+    
     return RemoteAccountModel(json['accessToken']);
   }
 
