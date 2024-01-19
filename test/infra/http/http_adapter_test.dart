@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:curso_clean/data/http/http.dart';
 import 'package:curso_clean/infra/http/http.dart';
 import 'package:faker/faker.dart';
@@ -18,6 +20,15 @@ void main() {
     url = faker.internet.httpUrl();
   });
 
+  group('shared', () {
+    test('Should throw ServerError if invalid method is provided', () {
+      final future = sut.request(url: url, method: 'invalid_method');
+
+      expect(future, throwsA(HttpError.serverError));
+
+    });
+  });
+
   group('post', () {
     PostExpectation mockRequest() => when(
         client.post(any, headers: anyNamed('headers'), body: anyNamed('body')));
@@ -25,6 +36,8 @@ void main() {
     void mockResponse(int statusCode,
             {String body = '{"any_key":"any_value"}'}) =>
         mockRequest().thenAnswer((_) async => Response(body, statusCode));
+
+    void mockError() => mockRequest().thenThrow(Exception());
 
     setUp(() {
       mockResponse(200);
@@ -131,6 +144,14 @@ void main() {
       final future = sut.request(url: url, method: 'post');
 
       expect(future, throwsA(HttpError.notFound));
+    });
+
+    test('Should return ServerError if post throws', () async {
+      mockError();
+
+      final future = sut.request(url: url, method: 'post');
+
+      expect(future, throwsA(HttpError.serverError));
     });
   });
 }
