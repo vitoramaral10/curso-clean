@@ -3,7 +3,7 @@ import 'package:curso_clean/data/models/models.dart';
 import 'package:curso_clean/domain/entities/entities.dart';
 import 'package:curso_clean/domain/helpers/helpers.dart';
 import 'package:curso_clean/domain/usecases/usecases.dart';
-import 'package:meta/meta.dart';
+import 'package:flutter/foundation.dart';
 
 class RemoteAuthentication implements Authentication {
   final HttpClient httpClient;
@@ -11,6 +11,7 @@ class RemoteAuthentication implements Authentication {
 
   RemoteAuthentication({@required this.httpClient, @required this.url});
 
+  @override
   Future<AccountEntity> auth(AuthenticationParams params) async {
     final body = RemoteAuthenticationParams.fromDomain(params).toJson();
 
