@@ -3,27 +3,27 @@ import 'package:curso_clean/data/usecases/usecases.dart';
 import 'package:curso_clean/domain/helpers/helpers.dart';
 import 'package:curso_clean/domain/usecases/usecases.dart';
 import 'package:faker/faker.dart';
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
 class HttpClientSpy extends Mock implements HttpClient {}
 
 void main() {
-  RemoteAuthentication sut;
-  HttpClientSpy httpClient;
-  String url;
-  AuthenticationParams params;
+  late RemoteAuthentication sut;
+  late HttpClientSpy httpClient;
+  late String url;
+  late AuthenticationParams params;
 
   Map mockValidData() => {
         'accessToken': faker.guid.guid(),
         'name': faker.person.name(),
       };
 
-  PostExpectation mockRequest() => when(
-        httpClient.request(
-          url: anyNamed('url'),
-          method: anyNamed('method'),
-          body: anyNamed('body'),
+  When mockRequest() => when(
+        () => httpClient.request(
+          url: any(named: 'url'),
+          method: any(named: 'method'),
+          body: any(named: 'body'),
         ),
       );
   void mockHttpData(Map data) {
@@ -47,10 +47,10 @@ void main() {
   test('Should call HttClient with correct values', () async {
     await sut.auth(params);
 
-    verify(httpClient.request(url: url, method: 'post', body: {
-      'email': params.email,
-      'password': params.secret,
-    }));
+    verify(() => httpClient.request(url: url, method: 'post', body: {
+          'email': params.email,
+          'password': params.secret,
+        }));
   });
 
   test('Should throw UnexpectedError if HttpClient returns 400', () async {

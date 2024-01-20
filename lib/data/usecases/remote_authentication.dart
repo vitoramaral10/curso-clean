@@ -1,15 +1,14 @@
-import 'package:curso_clean/data/http/http.dart';
-import 'package:curso_clean/data/models/models.dart';
-import 'package:curso_clean/domain/entities/entities.dart';
-import 'package:curso_clean/domain/helpers/helpers.dart';
-import 'package:curso_clean/domain/usecases/usecases.dart';
-import 'package:flutter/foundation.dart';
+import '/data/http/http.dart';
+import '/data/models/models.dart';
+import '/domain/entities/entities.dart';
+import '/domain/helpers/helpers.dart';
+import '/domain/usecases/usecases.dart';
 
 class RemoteAuthentication implements Authentication {
   final HttpClient httpClient;
   final String url;
 
-  RemoteAuthentication({@required this.httpClient, @required this.url});
+  RemoteAuthentication({required this.httpClient, required this.url});
 
   @override
   Future<AccountEntity> auth(AuthenticationParams params) async {
@@ -21,6 +20,8 @@ class RemoteAuthentication implements Authentication {
         method: 'post',
         body: body,
       );
+
+      if (httpResponse == null) throw HttpError.noContent;
 
       return RemoteAccountModel.fromJson(httpResponse).toEntity();
     } on HttpError catch (error) {
@@ -35,7 +36,7 @@ class RemoteAuthenticationParams {
   final String email;
   final String password;
 
-  RemoteAuthenticationParams({@required this.email, @required this.password});
+  RemoteAuthenticationParams({required this.email, required this.password});
 
   factory RemoteAuthenticationParams.fromDomain(AuthenticationParams params) =>
       RemoteAuthenticationParams(email: params.email, password: params.secret);

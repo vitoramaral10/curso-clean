@@ -7,25 +7,22 @@
         {
             "name": "curso-clean",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "program": "lib/main/main.dart"
         },
         {
             "name": "curso-clean (profile mode)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "flutterMode": "profile",
+            "program": "lib/main/main.dart"
         },
         {
             "name": "curso-clean (release mode)",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "release"
-        },
-        {
-            "name": "Flutter Run all Tests",
-            "type": "dart",
-            "request": "launch",
-            "program": "./test/"
+            "flutterMode": "release",
+            "program": "lib/main/main.dart"
         }
     ]
 }
