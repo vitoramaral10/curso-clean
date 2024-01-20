@@ -5,28 +5,42 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        children: [
-          Image.asset('lib/ui/assets/logo.png'),
-          Text('Login'.toUpperCase()),
-          Form(
-            child: Column(
-              children: [
-                TextFormField(
-                  decoration: const InputDecoration(labelText: 'Email'),
-                ),
-                TextFormField(
-                  decoration: const InputDecoration(labelText: 'Password'),
-                ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: const Text('Login'),
-                )
-              ],
+    return Scaffold(
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const Image(image: AssetImage('lib/ui/assets/logo.png')),
+            Text('Login'.toUpperCase()),
+            Form(
+              child: Column(
+                children: [
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      labelText: 'Email',
+                      icon: Icon(Icons.email),
+                    ),
+                    keyboardType: TextInputType.emailAddress,
+                  ),
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      labelText: 'Password',
+                      icon: Icon(Icons.lock),
+                    ),
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: Text('Entrar'.toUpperCase()),
+                  ),
+                  TextButton.icon(
+                    onPressed: () {},
+                    icon: const Icon(Icons.person),
+                    label: const Text('Criar cConta'),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
