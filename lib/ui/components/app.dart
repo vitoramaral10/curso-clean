@@ -52,7 +52,6 @@ class App extends StatelessWidget {
             foregroundColor: primaryColor,
           ),
         ),
-        
       ),
       home: const LoginPage(),
     );
