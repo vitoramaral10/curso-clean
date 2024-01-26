@@ -6,11 +6,14 @@ import 'package:mocktail/mocktail.dart';
 class LoginPresenterSpy extends Mock implements LoginPresenter {}
 
 void main() {
+  Future<void> loadPage(WidgetTester tester) async {
+    const loginPage = LoginPage();
+    await tester.pumpWidget(const MaterialApp(home: loginPage));
+  }
+
   testWidgets('Should load with correct inicial state',
       (WidgetTester tester) async {
-    const loginPage = LoginPage();
-
-    await tester.pumpWidget(const MaterialApp(home: loginPage));
+    await loadPage(tester);
 
     final emailTextChildren = find.descendant(
         of: find.bySemanticsLabel('Email'), matching: find.byType(Text));
@@ -26,5 +29,10 @@ void main() {
 
     final button = tester.widget<ElevatedButton>(find.byType(ElevatedButton));
     expect(button.onPressed, null);
+  });
+
+  testWidgets('Should call validate with correct values',
+      (WidgetTester tester) async {
+    loadPage(tester);
   });
 }
