@@ -1,8 +1,8 @@
 import 'package:curso_clean/data/http/http.dart';
 import 'package:curso_clean/infra/http/http.dart';
 import 'package:faker/faker.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:test/test.dart';
 
 import '../mocks/mocks.dart';
 

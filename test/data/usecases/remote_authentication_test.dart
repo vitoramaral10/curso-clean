@@ -3,8 +3,8 @@ import 'package:curso_clean/data/usecases/usecases.dart';
 import 'package:curso_clean/domain/helpers/helpers.dart';
 import 'package:curso_clean/domain/usecases/usecases.dart';
 import 'package:faker/faker.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:test/test.dart';
 
 class HttpClientSpy extends Mock implements HttpClient {}
 
