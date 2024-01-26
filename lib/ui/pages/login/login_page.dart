@@ -15,7 +15,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   @override
   void dispose() {
-    widget.presenter?.dispose();
+    widget.presenter!.dispose();
     super.dispose();
   }
 
@@ -23,7 +23,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Builder(builder: (context) {
-        widget.presenter?.isLoadingStream.listen((isLoading) {
+        widget.presenter!.isLoadingStream.listen((isLoading) {
           if (isLoading == true) {
             showDialog(
               context: context,
@@ -51,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
           }
         });
 
-        widget.presenter?.mainErrorStream.listen((error) {
+        widget.presenter!.mainErrorStream.listen((error) {
           if (error != null) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
@@ -63,7 +63,6 @@ class _LoginPageState extends State<LoginPage> {
               ),
             );
           }
-          
         });
 
         return SingleChildScrollView(
@@ -92,7 +91,7 @@ class _LoginPageState extends State<LoginPage> {
                                     : snapshot.data,
                               ),
                               keyboardType: TextInputType.emailAddress,
-                              onChanged: widget.presenter?.validateEmail,
+                              onChanged: widget.presenter!.validateEmail,
                             );
                           }),
                       Padding(
@@ -112,7 +111,7 @@ class _LoginPageState extends State<LoginPage> {
                                       : snapshot.data,
                                 ),
                                 obscureText: true,
-                                onChanged: widget.presenter?.validatePassword,
+                                onChanged: widget.presenter!.validatePassword,
                               );
                             }),
                       ),
@@ -121,9 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                           builder: (context, snapshot) {
                             return ElevatedButton(
                               onPressed: snapshot.data == true
-                                  ? () {
-                                      widget.presenter?.auth();
-                                    }
+                                  ? widget.presenter!.auth
                                   : null,
                               child: Text('Entrar'.toUpperCase()),
                             );
