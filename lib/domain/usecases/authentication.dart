@@ -1,4 +1,4 @@
-import 'package:curso_clean/domain/entities/entities.dart';
+import '../entities/account_entity.dart';
 
 abstract class Authentication {
   Future<AccountEntity> auth(AuthenticationParams params);

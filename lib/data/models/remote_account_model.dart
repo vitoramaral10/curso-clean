@@ -1,5 +1,5 @@
-import '../../data/http/http.dart';
-import '../../domain/entities/entities.dart';
+import '../../domain/entities/account_entity.dart';
+import '../http/http_error.dart';
 
 class RemoteAccountModel {
   final String accessToken;
