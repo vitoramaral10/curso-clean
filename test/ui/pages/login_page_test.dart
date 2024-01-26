@@ -1,4 +1,5 @@
 import 'package:curso_clean/ui/pages/pages.dart';
+import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -6,9 +7,15 @@ import 'package:mocktail/mocktail.dart';
 class LoginPresenterSpy extends Mock implements LoginPresenter {}
 
 void main() {
+  late LoginPresenter presenter;
+
+  setUp(() {
+    presenter = LoginPresenterSpy();
+  });
+
   Future<void> loadPage(WidgetTester tester) async {
-    const loginPage = LoginPage();
-    await tester.pumpWidget(const MaterialApp(home: loginPage));
+    final loginPage = MaterialApp(home: LoginPage(presenter));
+    await tester.pumpWidget(loginPage);
   }
 
   testWidgets('Should load with correct inicial state',
@@ -33,6 +40,14 @@ void main() {
 
   testWidgets('Should call validate with correct values',
       (WidgetTester tester) async {
-    loadPage(tester);
+    await loadPage(tester);
+
+    final email = faker.internet.email();
+    await tester.enterText(find.bySemanticsLabel('Email'), email);
+    verify(() => presenter.validateEmail(email));
+
+    final password = faker.internet.password();
+    await tester.enterText(find.bySemanticsLabel('Senha'), password);
+    verify(() => presenter.validatePassword(password));
   });
 }
