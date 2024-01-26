@@ -7,6 +7,7 @@ import '../../components/headline1.dart';
 import '../../components/login_header.dart';
 import '../../components/spinner_dialog.dart';
 import 'components/email_input.dart';
+import 'components/login_button.dart';
 import 'components/password_input.dart';
 
 class LoginPage extends StatefulWidget {
@@ -61,16 +62,7 @@ class _LoginPageState extends State<LoginPage> {
                           padding: EdgeInsets.only(top: 8, bottom: 32),
                           child: PasswordInput(),
                         ),
-                        StreamBuilder<bool>(
-                            stream: widget.presenter!.isFormValidStream,
-                            builder: (context, snapshot) {
-                              return ElevatedButton(
-                                onPressed: snapshot.data == true
-                                    ? widget.presenter!.auth
-                                    : null,
-                                child: Text('Entrar'.toUpperCase()),
-                              );
-                            }),
+                        const LoginButton(),
                         TextButton.icon(
                           onPressed: () {},
                           icon: const Icon(Icons.person),
