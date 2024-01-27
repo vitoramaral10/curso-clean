@@ -1,3 +1,4 @@
+import 'package:curso_clean/validations/validators/required_field_validation.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -18,21 +19,4 @@ void main() {
   test('Should return error if value is null', () {
     expect(sut.validate(null), 'Campo obrigatório');
   });
-}
-
-abstract class FieldValidation {
-  String get field;
-  String? validate(String? value);
-}
-
-class RequiredFieldValidation implements FieldValidation {
-  @override
-  final String field;
-
-  RequiredFieldValidation(this.field);
-
-  @override
-  String? validate(String? value) {
-    return value?.isNotEmpty == true ? null : 'Campo obrigatório';
-  }
 }
