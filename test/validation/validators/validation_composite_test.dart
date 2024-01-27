@@ -3,6 +3,8 @@ import 'package:curso_clean/validations/protocols/field_validation.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+class FieldValidationSpy extends Mock implements FieldValidation {}
+
 void main() {
   late ValidationComposite sut;
   late FieldValidation validation1;
@@ -23,13 +25,13 @@ void main() {
 
   setUp(() {
     validation1 = FieldValidationSpy();
-    when(() => validation1.field).thenReturn('any_field');
+    when(() => validation1.field).thenReturn('other_field');
     mockValidation1(null);
     validation2 = FieldValidationSpy();
     when(() => validation2.field).thenReturn('any_field');
     mockValidation2(null);
     validation3 = FieldValidationSpy();
-    when(() => validation3.field).thenReturn('other_field');
+    when(() => validation3.field).thenReturn('any_field');
     mockValidation3(null);
 
     sut = ValidationComposite([validation1, validation2]);
@@ -49,7 +51,7 @@ void main() {
 
     final error = sut.validate(field: 'any_field', value: 'any_value');
 
-    expect(error, 'error_1');
+    expect(error, 'error_2');
   });
 }
 
@@ -68,6 +70,7 @@ class ValidationComposite implements Validation {
     }
     return null;
   }
-}
 
-class FieldValidationSpy extends Mock implements FieldValidation {}
+  @override
+  String get field => '';
+}
