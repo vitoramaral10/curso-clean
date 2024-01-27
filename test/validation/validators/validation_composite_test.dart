@@ -1,5 +1,5 @@
-import 'package:curso_clean/presentation/protocols/validation.dart';
 import 'package:curso_clean/validations/protocols/field_validation.dart';
+import 'package:curso_clean/validations/validators/validation_composite.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -53,24 +53,4 @@ void main() {
 
     expect(error, 'error_2');
   });
-}
-
-class ValidationComposite implements Validation {
-  final List<FieldValidation> validations;
-
-  ValidationComposite(this.validations);
-
-  @override
-  String? validate({required String field, String? value}) {
-    for (final validation in validations.where((v) => v.field == field)) {
-      final error = validation.validate(value);
-      if (error?.isNotEmpty == true) {
-        return error;
-      }
-    }
-    return null;
-  }
-
-  @override
-  String get field => '';
 }
