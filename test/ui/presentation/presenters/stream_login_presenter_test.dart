@@ -1,14 +1,18 @@
-import 'package:curso_clean/presentation/presenters/stream_login_presenter.dart';
-import 'package:curso_clean/presentation/protocols/validation.dart';
+import 'package:curso_clean/domain/usecases/usecases.dart';
+import 'package:curso_clean/presentation/presenters/presenters.dart';
+import 'package:curso_clean/presentation/protocols/protocols.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
 class ValidationSpy extends Mock implements Validation {}
 
+class AuthenticationSpy extends Mock implements Authentication {}
+
 void main() {
   late StreamLoginPresenter sut;
   late ValidationSpy validation;
+  late AuthenticationSpy authentication;
   late String email;
   late String password;
 
@@ -21,7 +25,9 @@ void main() {
 
   setUp(() {
     validation = ValidationSpy();
-    sut = StreamLoginPresenter(validation: validation);
+    authentication = AuthenticationSpy();
+    sut = StreamLoginPresenter(
+        validation: validation, authentication: authentication);
     email = faker.internet.email();
     password = faker.internet.password();
 
@@ -92,7 +98,7 @@ void main() {
   //   );
 
   //   sut.validatePassword(password);
-    
+
   //   sut.validatePassword(password);
   // });
 

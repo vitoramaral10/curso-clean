@@ -1,8 +1,7 @@
-import 'package:curso_clean/data/http/http_client.dart';
-import 'package:curso_clean/data/http/http_error.dart';
-import 'package:curso_clean/data/usecases/remote_authentication.dart';
-import 'package:curso_clean/domain/helpers/domain_error.dart';
-import 'package:curso_clean/domain/usecases/authentication.dart';
+import 'package:curso_clean/data/http/http.dart';
+import 'package:curso_clean/data/usecases/usecases.dart';
+import 'package:curso_clean/domain/helpers/helpers.dart';
+import 'package:curso_clean/domain/usecases/usecases.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';

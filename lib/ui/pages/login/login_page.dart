@@ -1,14 +1,9 @@
-import 'package:curso_clean/ui/pages/login/login_presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../components/error_message.dart';
-import '../../components/headline1.dart';
-import '../../components/login_header.dart';
-import '../../components/spinner_dialog.dart';
-import 'components/email_input.dart';
-import 'components/login_button.dart';
-import 'components/password_input.dart';
+import '../../components/components.dart';
+import 'components/components.dart';
+import 'login.dart';
 
 class LoginPage extends StatefulWidget {
   final LoginPresenter? presenter;

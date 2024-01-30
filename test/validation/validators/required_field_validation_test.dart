@@ -1,4 +1,4 @@
-import 'package:curso_clean/validations/validators/required_field_validation.dart';
+import 'package:curso_clean/validations/validators/validators.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

@@ -1,4 +1,4 @@
-import 'package:curso_clean/validations/protocols/field_validation.dart';
+import '../protocols/protocols.dart';
 
 class EmailValidation implements FieldValidation {
   @override

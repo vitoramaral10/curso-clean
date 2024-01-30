@@ -1,4 +1,4 @@
-import 'package:curso_clean/validations/validators/email_validation.dart';
+import 'package:curso_clean/validations/validators/validators.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter_test/flutter_test.dart';
 

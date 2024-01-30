@@ -1,5 +1,5 @@
-import 'package:curso_clean/validations/protocols/field_validation.dart';
-import 'package:curso_clean/validations/validators/validation_composite.dart';
+import 'package:curso_clean/validations/protocols/protocols.dart';
+import 'package:curso_clean/validations/validators/validators.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 

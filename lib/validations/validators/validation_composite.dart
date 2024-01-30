@@ -1,5 +1,6 @@
-import 'package:curso_clean/presentation/protocols/validation.dart';
-import 'package:curso_clean/validations/protocols/field_validation.dart';
+
+import '../../presentation/protocols/protocols.dart';
+import '../protocols/protocols.dart';
 
 class ValidationComposite implements Validation {
   final List<FieldValidation> validations;
