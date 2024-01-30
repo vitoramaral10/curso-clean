@@ -1,11 +1,11 @@
-import 'package:curso_clean/validations/validators/email_validation.dart';
-import 'package:curso_clean/validations/validators/required_field_validation.dart';
-import 'package:curso_clean/validations/validators/validation_composite.dart';
+import '../../../../presentation/protocols/protocols.dart';
+import '../../../../validations/protocols/protocols.dart';
+import '../../../../validations/validators/validators.dart';
 
-import '../../../../presentation/protocols/validation.dart';
+Validation makeLoginValidation() => ValidationComposite(makeLoginValidations());
 
-Validation makeLoginValidation() => ValidationComposite([
-      RequiredFieldValidation('email'),
-      EmailValidation('email'),
-      RequiredFieldValidation('password'),
-    ]);
+List<FieldValidation> makeLoginValidations() => [
+      const RequiredFieldValidation('email'),
+      const EmailValidation('email'),
+      const RequiredFieldValidation('password'),
+    ];
