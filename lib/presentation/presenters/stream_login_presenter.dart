@@ -4,7 +4,6 @@ import '../../domain/usecases/usecases.dart';
 import '../../ui/pages/login/login.dart';
 import '../protocols/protocols.dart';
 
-
 class LoginState {
   late String? email;
   late String? password;
