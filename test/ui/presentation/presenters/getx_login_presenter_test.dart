@@ -21,14 +21,8 @@ void main() {
   When mockValidationCall({String? field}) => when(() => validation.validate(
       field: field ?? any(named: 'field'), value: any(named: 'value')));
 
-  When mockAuthenticationCall() => when(() => authentication.auth(any()));
-
   void mockValidation({String? field, String? value}) {
     mockValidationCall(field: field).thenReturn(value);
-  }
-
-  void mockAuthenticationError(DomainError error) {
-    mockAuthenticationCall().thenThrow(error);
   }
 
   setUp(() {
