@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import '../../domain/usecases/usecases.dart';
-import '../../ui/pages/login/login.dart';
+import '../../ui/pages/pages.dart';
 import '../protocols/protocols.dart';
 
 class LoginState {
